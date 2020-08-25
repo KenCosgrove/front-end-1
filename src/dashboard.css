@@ -14,8 +14,9 @@ p {
     display:flex;
     justify-content: space-around;
     align-items: center;
+    min-height: 70vh;
     width: 80%;
-    margin: 7rem auto 0 auto;
+    margin: 0 auto;
 }
 
 .left-flexbox {
