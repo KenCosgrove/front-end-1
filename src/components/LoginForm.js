@@ -3,7 +3,7 @@ import React from 'react'
 
 const LoginForm = (props) => {
 
-    const {values, submit, update, inputChange, disabled, /* errors */} = props
+    const {values, submit, update, inputChange, /* errors */} = props
    
     const onSubmit = evt => {
         evt.preventDefault()
@@ -15,7 +15,6 @@ const LoginForm = (props) => {
         inputChange(name, value)
         update(name, value)
       }
-
 
     return (
        <form onSubmit={onSubmit}>
@@ -47,7 +46,7 @@ const LoginForm = (props) => {
                     />
                 </label>
                 <br/>
-                <button disabled={disabled}> Login </button>
+                <button> Login </button>
             </div>
        </form>
     )

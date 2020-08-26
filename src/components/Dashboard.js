@@ -8,15 +8,17 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import '../dashboard.css'
 
 const initialSignUpFormValues = {
-    name: '',
+    fname: '',
+    lname: '',
     username: '',
-    email: '',
+    /* email: '', */
     password:'',
-    tos: false,
+   /*  tos: false, */
   }
   
   const initialSignUpFormErrors = {
-    name: '',
+    fname: '',
+    lname: '',
     username: '',
     email: '',
     password:'',
@@ -101,7 +103,7 @@ const Dashboard = () => {
   }
 
   const postNewUser = newUser => {
-    axios.post('https://reqres.in/api/users', newUser)
+    axios.post('https://usemytechstuff-app.herokuapp.com/api/signup', newUser)
       .then(res => {
         setUsers([...users, res.data])
         console.log(res.data)
@@ -112,28 +114,31 @@ const Dashboard = () => {
       })
       .finally(() => {
         setSignUpFormValues( { 
-         name: '',
+         fname: '',
+         lname: '',
          username: '',   
-         email: '',
+        /*  email: '', */
          password:'',
-         tos: false,})
+        /*  tos: false, */})
       })
   }
 
     const submit = () => {
     const newUser = {
-      name: signUpFormValues.name.trim(),
+      fname: signUpFormValues.fname.trim(),
+      lname: signUpFormValues.lname.trim(),
       username: signUpFormValues.username.trim(),
-      email: signUpFormValues.email.trim(),
+      /* email: signUpFormValues.email.trim(), */
       password: signUpFormValues.password,
-      tos: signUpFormValues.tos,
+      /* tos: signUpFormValues.tos, */
     }
     setSignUpFormValues( 
-       {name: '',
+       {fname: '',
+       lname: '',
         username: '',
-        email: '',
+       /*  email: '', */
         password:'',
-        tos: false,})
+        /* tos: false, */})
     postNewUser(newUser)
   }
 
@@ -144,13 +149,13 @@ const Dashboard = () => {
                 password: '',
             }
         )
-    }
+    }  
 
-  const checkboxChange = (name, isChecked) => {
+/*   const checkboxChange = (name, isChecked) => {
     setSignUpFormValues({
         ...signUpFormValues, [name]: isChecked
     })
-  }
+  } */
 
   useEffect(() => {
     formSchema.isValid(signUpFormValues)
@@ -177,14 +182,13 @@ const Dashboard = () => {
                         <Link to="/login">Login</Link>
                     </nav>
                 </header>
-
                
         <Route path='/signup'>
           <SignUpForm
              values={signUpFormValues}
              update={update}
              inputChange={inputChange}
-             checkboxChange={checkboxChange}
+            /*  checkboxChange={checkboxChange} */
              submit={submit}
              disabled={disabled} 
              errors={signUpFormErrors}     
@@ -196,7 +200,6 @@ const Dashboard = () => {
              update={loginUpdate}
              inputChange={loginInputChange}
              submit={loginSubmit}
-             /* disabled={disabled} */
              errors={loginFormErrors}     
             />
             </Route>

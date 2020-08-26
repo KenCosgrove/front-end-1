@@ -1,13 +1,17 @@
 import * as yup from 'yup'
 
 const formSchema = yup.object().shape({
-  email: yup
+ /*  email: yup
     .string()
     .email('Must be a valid email address')
-    .required('Must include email address'),
-  name: yup
+    .required('Must include email address'), */
+  fname: yup
     .string()
-    .min(2, 'Name must be at least 2 characters long')
+    .min(2, 'First Name must be at least 2 characters long')
+    .required('Name is Required'),
+  lname: yup
+    .string()
+    .min(3, 'Last Name must be at least 3 characters long')
     .required('Name is Required'),
   password: yup
     .string()
@@ -17,7 +21,6 @@ const formSchema = yup.object().shape({
     .string()
     .min(5, 'Please choose a username at least 5 characters in length')
     .required('you must enter a username'),
-   
 })
 
 export default formSchema
