@@ -1,4 +1,44 @@
 import React from 'react'
+import { Button, Form, FormGroup } from 'reactstrap';
+import styled from 'styled-components'
+
+//stlyes
+const Styleddiv = styled.div`
+    
+    width: 50%;
+    margin: 0 auto;
+    
+
+   .form-inputs {
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+	   color: white;
+	   font-weight:bold;
+       text-shadow:1px 1px black;
+       min-height: 80vh;
+   }
+   input, input[placeholder] {
+    text-align: center;
+}
+   h2 {
+       text-align: center;
+       color: white;
+       text-shadow: 2px 1px black;
+       margin-bottom: 1.5rem;
+   }
+
+   .errors {
+       text-align: center;
+       color: red;
+       font-size: 1.6rem;
+       text-shadow: 2px 1px black;
+       font-weight: bold;
+   }
+`
+
+
 
 const SignUpForm = (props) => {
 
@@ -22,8 +62,9 @@ const SignUpForm = (props) => {
 
 
     return (
-       <form onSubmit={onSubmit}>
-           <h2>Sign Up</h2>
+        <Styleddiv>
+       <Form onSubmit={onSubmit}>
+           
 
             <div className='errors'>
               <div>{errors.fname}</div>
@@ -35,6 +76,7 @@ const SignUpForm = (props) => {
             </div>
 
             <div className='form-inputs'>
+            <h2>Sign Up</h2>
                 <label>
                   First Name:&nbsp;
                     <input
@@ -100,9 +142,10 @@ const SignUpForm = (props) => {
                     />
                 </label>
                 <br/> */}
-                <button disabled={disabled}> Get Started! </button>
+                <Button color = "primary" disabled={disabled}> Get Started! </Button>
             </div>
-       </form>
+       </Form>
+       </Styleddiv>
     )
 }
 

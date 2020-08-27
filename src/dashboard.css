@@ -7,7 +7,17 @@ body {
 p {
     text-shadow: 1px 2px black;
     font-size: 1.3rem;
-    
+    color: white;
+}
+
+h1 {
+    color: white;
+}
+
+h3 {
+    color: white;
+    text-align: center;
+    text-shadow: 1px 2px black;
 }
 
 .dashboard-container {
@@ -27,11 +37,6 @@ p {
     text-align: center;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
 header {
     display: flex;
     justify-content: space-between;
@@ -41,7 +46,10 @@ header {
 }
 
 .navbar  {
+     
     margin: 0 1.5rem;
+    text-decoration: none;
+    color: white;
 }
 
 img {
@@ -56,4 +64,5 @@ img {
     background: slategray;
     text-align: center;
     width: 35%;
+    color: white;
 }

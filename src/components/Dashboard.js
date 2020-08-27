@@ -6,23 +6,41 @@ import axios from 'axios'
 import LoginForm from './LoginForm'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import '../dashboard.css'
+import NewUsers from './NewUsers'
+import styled from 'styled-components'
+
+
+const Styleddiv = styled.div`
+   color: white;
+   text-shadow: 2px 1px black;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+
+
+   `
+
+
+
 
 const initialSignUpFormValues = {
     fname: '',
     lname: '',
     username: '',
-    /* email: '', */
+    email: '', 
     password:'',
-   /*  tos: false, */
+    tos: ''
   }
   
   const initialSignUpFormErrors = {
     fname: '',
     lname: '',
     username: '',
-    email: '',
+    email: '', 
     password:'',
-    tos:'',
+    tos:'', 
   }
   const initialLoginFormErrors = {
     username: '',
@@ -102,44 +120,32 @@ const Dashboard = () => {
     })
   }
 
-  const postNewUser = newUser => {
-    axios.post('https://usemytechstuff-app.herokuapp.com/api/signup', newUser)
-      .then(res => {
-        setUsers([...users, res.data])
-        console.log(res.data)
-        console.log(users)
-      })
-      .catch(err => {
-        console.log("error")
-      })
-      .finally(() => {
-        setSignUpFormValues( { 
-         fname: '',
-         lname: '',
-         username: '',   
-        /*  email: '', */
-         password:'',
-        /*  tos: false, */})
-      })
-  }
+useEffect(()=> {
+  axios.get("https://reqres.in/api/users").then(res=>{
+    setUsers(res.data.data)
+    console.log(res.data.data)
+  }).catch(err=>{
+    console.log("error")
+  })
+}, [])
 
     const submit = () => {
     const newUser = {
       fname: signUpFormValues.fname.trim(),
       lname: signUpFormValues.lname.trim(),
       username: signUpFormValues.username.trim(),
-      /* email: signUpFormValues.email.trim(), */
+      email: signUpFormValues.email.trim(), 
       password: signUpFormValues.password,
-      /* tos: signUpFormValues.tos, */
+      tos: signUpFormValues.tos, 
     }
     setSignUpFormValues( 
        {fname: '',
-       lname: '',
+        lname: '',
         username: '',
-       /*  email: '', */
+        email: '', 
         password:'',
-        /* tos: false, */})
-    postNewUser(newUser)
+        tos: ''})
+    /* postNewUser(newUser) */
   }
 
     const loginSubmit = ()=> {
@@ -151,11 +157,11 @@ const Dashboard = () => {
         )
     }  
 
-/*   const checkboxChange = (name, isChecked) => {
+   const checkboxChange = (name, isChecked) => {
     setSignUpFormValues({
         ...signUpFormValues, [name]: isChecked
     })
-  } */
+  } 
 
   useEffect(() => {
     formSchema.isValid(signUpFormValues)
@@ -175,11 +181,11 @@ const Dashboard = () => {
         <Router>
         <div>
                 <header>
-                    <h1>Use My Tech</h1>
-                    <nav>
-                        <Link to='/'>Home</Link>
+                    
+                    <nav className="navbar">
+                        <Link className="navbar" to='/'>Home</Link>
                         <Link to='/signup' className='navbar'>Sign Up</Link>
-                        <Link to="/login">Login</Link>
+                        <Link className="navbar" to="/login">Login</Link>
                     </nav>
                 </header>
                
@@ -188,7 +194,7 @@ const Dashboard = () => {
              values={signUpFormValues}
              update={update}
              inputChange={inputChange}
-            /*  checkboxChange={checkboxChange} */
+             checkboxChange={checkboxChange} 
              submit={submit}
              disabled={disabled} 
              errors={signUpFormErrors}     
@@ -218,6 +224,13 @@ const Dashboard = () => {
                     </div>
                 </div>
             </Route>
+            <h3 className="recent">Recent signups</h3>
+            <Styleddiv>
+              
+            {users.map(user => {
+              return  <NewUsers name={user.first_name}  picture= {user.avatar} />
+            })}
+           </Styleddiv>
         </div>
         </Router>
     )
